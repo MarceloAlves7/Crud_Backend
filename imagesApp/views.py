@@ -6,6 +6,7 @@ from rest_framework import viewsets, generics, status
 from imagesApp.serializer import ImageSerializer, UserSerializer, ListImageUserSerializer
 from imagesApp.models import Image, Usuario
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 
 
@@ -18,6 +19,7 @@ class ImageViewSet(viewsets.ModelViewSet):
     """Exibindo todos os Users"""
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
+    #permission_classes = [IsAuthenticated]
 
 
 class ListImageUser(generics.ListAPIView):
@@ -27,6 +29,8 @@ class ListImageUser(generics.ListAPIView):
             return queryset
 
         serializer_class = ListImageUserSerializer  
+        #permission_classes = [IsAuthenticated]
+
         
 class ListOneImageUser(viewsets.ModelViewSet):
         """Exibindo uma imagem de um User"""
@@ -34,11 +38,13 @@ class ListOneImageUser(viewsets.ModelViewSet):
             queryset = Image.objects.filter(user_id=self.kwargs['user_id'])
             return queryset
         serializer_class = ListImageUserSerializer
+        #permission_classes = [IsAuthenticated]
 
 
 
 class UploadImages(generics.CreateAPIView):
     serializer_class = ImageSerializer
+    #permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         user = kwargs['user_id']
