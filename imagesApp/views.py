@@ -26,6 +26,13 @@ class ListImageUser(generics.ListAPIView):
             queryset = Image.objects.filter(user_id=self.kwargs['pk'])
             return queryset
 
+        serializer_class = ListImageUserSerializer  
+        
+class ListOneImageUser(viewsets.ModelViewSet):
+        """Exibindo uma imagem de um User"""
+        def get_queryset(self):
+            queryset = Image.objects.filter(user_id=self.kwargs['user_id'])
+            return queryset
         serializer_class = ListImageUserSerializer
 
 
