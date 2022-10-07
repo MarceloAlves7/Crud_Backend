@@ -3,6 +3,8 @@ from pyexpat import model
 from rest_framework import serializers
 from imagesApp.models import Image, Usuario
 
+
+    
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
